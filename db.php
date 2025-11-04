@@ -1,4 +1,15 @@
 <?php
+ini_set("session.use_only_cookies", 1);
+ini_set("session.use_trans_sid", 0);
+session_set_cookie_params([
+    "lifetime" => 0,
+    "path" => "/",
+    "domain" => "",
+    "secure" => true,
+    "httponly" => true,
+    "samesite" => "Lax",
+]);
+
 session_start();
 
 if (empty($_SESSION["csrf_token"])) {
@@ -26,6 +37,6 @@ try {
         FOREIGN KEY (user_id) REFERENCES users(id)
     )");
 } catch (PDOException $e) {
-    error_log("Database Error: " . $e->getMessage());
+    log_event("Database Connection Error: " . $e->getMessage(), "error");
     die("Database connection failed. Please try again later.");
 }

@@ -1,4 +1,18 @@
 <?php
+/*
+ * Main dashboard page for the Task Tracker application.
+ *
+ * This script handles the core functionality for a logged-in user. It allows users to
+ * view, add, update, and delete their tasks.
+ *
+ * Key functionalities include:
+ * - Session management to ensure only authenticated users can access the page.
+ * - CSRF token validation for all form submissions to prevent cross-site request forgery.
+ * - Database operations (INSERT, UPDATE, DELETE, SELECT) for managing tasks,
+ *   all performed using prepared statements to prevent SQL injection.
+ * - Fetching user-specific data to personalize the dashboard.
+ * - Rendering the HTML structure for the task list and management forms.
+ */
 require_once "db.php";
 global $db;
 
