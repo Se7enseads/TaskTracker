@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (empty($_SESSION["csrf_token"])) {
+    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+}
+
 try {
     $db = new PDO("sqlite:task_tracker.db");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
